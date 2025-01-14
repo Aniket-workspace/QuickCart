@@ -9,17 +9,31 @@ const MainImageSection = ({ images, mainImage, setMainImage, title }) => (
       flexDirection: "column",
     }}
   >
-    {/* Main Image */}
-    <img
-      src={mainImage}
-      alt={title}
-      style={{
-        maxHeight: 500,
-        width: "100%",
-        objectFit: "contain",
-        marginBottom: 16,
+    <Box
+      sx={{
+        backgroundColor: "#ebebeb",
+        borderRadius: 5,
+        minHeight: 400,
+        display: "flex",
+        alignContent: "center",
+        transition: "background-color 0.3s ease",
+        "&:hover": {
+          backgroundColor: "#ff6f61",
+        },
       }}
-    />
+    >
+      {/* Main Image */}
+      <img
+        src={mainImage}
+        alt={title}
+        style={{
+          maxHeight: 400,
+          width: "100%",
+          objectFit: "contain",
+          // marginBottom: 16,
+        }}
+      />
+    </Box>
     {/* Thumbnails */}
     <Box
       sx={{
@@ -39,8 +53,7 @@ const MainImageSection = ({ images, mainImage, setMainImage, title }) => (
             width: 60,
             height: 60,
             cursor: "pointer",
-            border:
-              mainImage === img ? "2px solid #ff6f61" : "2px solid #ddd",
+            border: mainImage === img ? "2px solid #ff6f61" : "2px solid #ddd",
             borderRadius: 4,
             objectFit: "cover",
           }}

@@ -87,7 +87,6 @@ const Homepage = ({ categories }) => {
                   fontWeight: "bold",
                   marginBottom: 2,
                   color: "#ff4b39",
-                  backgroundColor: "#fff",
                   textAlign: "center",
                   padding: "5px",
                   borderRadius: 2,

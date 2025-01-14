@@ -89,8 +89,8 @@ const ProductDetailsPage = ({ product }) => {
   };
 
   return (
-    <Container sx={{ marginTop: 10, minHeight: "80vh" }}>
-      <Grid container spacing={3} alignItems="center">
+    <Container sx={{ marginTop: 12, minHeight: "80vh" }}>
+      <Grid container spacing={3} >
         <Grid item xs={12} sm={6}>
           <MainImageSection
             images={product.images}

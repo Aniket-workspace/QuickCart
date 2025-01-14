@@ -71,7 +71,7 @@ const ProductCard = ({ product }) => {
           flexDirection: "column",
           borderRadius: 2,
           boxShadow: 3,
-          transition: "transform 0.1s ease-in-out",
+          transition: "transform 0.3s ease-in-out",
           "&:hover": {
             transform: "scale(1.01)",
             boxShadow: 6,
