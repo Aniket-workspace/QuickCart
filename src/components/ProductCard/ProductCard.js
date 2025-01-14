@@ -78,7 +78,7 @@ const ProductCard = ({ product }) => {
           },
           backgroundColor: "background.paper",
           border: "1px solid #ddd",
-          height: 325,
+          height: {xs:290,sm:325},
         }}
         onMouseEnter={() => setShowIcons(true)}
         onMouseLeave={() => setShowIcons(false)}

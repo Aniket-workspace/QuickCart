@@ -17,7 +17,7 @@ const CountdownTimer = ({ timeLeft }) => {
         background: "linear-gradient(135deg, #ff4500, #ff6f61)",
         color: "#fff",
         padding: "5px 0",
-        fontSize: "0.875rem",
+        fontSize: {xs:"0.7rem",sm:"0.875rem"},
         marginTop: -4,
       }}
     >

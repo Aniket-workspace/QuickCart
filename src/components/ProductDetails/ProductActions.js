@@ -60,7 +60,7 @@ const ProductActions = ({
           Add to Cart
         </Button>
       ) : (
-        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }} gap={{xs:2,md:3}}>
+        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }} gap={{xs:1,md:3}}>
           <Button
             variant="contained"
             size="small"
