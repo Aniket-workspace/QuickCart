@@ -54,6 +54,12 @@ const CategoryPage = ({
     currentPage * productsPerPage
   );
 
+  const convertedCategorySlug = (title) => {
+    return title
+      .trim() // Remove leading and trailing spaces
+      .replace(/[\s_-]+/g, " "); // Replace spaces and underscores with hyphens
+  };
+
   return (
     <Container
       maxWidth="lg"
@@ -92,6 +98,23 @@ const CategoryPage = ({
         </Typography>
       </Box>
 
+      <Box sx={{display:{xs:"block",md:"none"}, marginBottom:4, marginTop:-3}}>
+        <Typography
+          variant="h5"
+          sx={{
+            textTransform: "capitalize",
+            color: "#ff4b39",
+            textAlign: "center",
+            padding: 2,
+            boxShadow: 3,
+            borderRadius: 2,
+            fontWeight: "bold",
+          }}
+        >
+          {convertedCategorySlug(category)}
+        </Typography>
+      </Box>
+
       {/* Filters */}
 
       <Filters
@@ -105,7 +128,7 @@ const CategoryPage = ({
       />
 
       {/* Products Grid */}
-      <Grid container spacing={{xs:1,md:4}}>
+      <Grid container spacing={{ xs: 1, md: 4 }}>
         {paginatedProducts.map((product) => (
           <Grid item xs={6} sm={6} md={3} key={product.id}>
             <ProductCard product={product} />

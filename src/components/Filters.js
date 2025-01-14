@@ -42,14 +42,12 @@ const Filters = ({
   const handleResetPriceRange = () => {
     setPriceRange(initialPriceRange); // Reset to the initial price range
   };
-  
 
-  const convertedCategorySlug=(title) =>{
+  const convertedCategorySlug = (title) => {
     return title
       .trim() // Remove leading and trailing spaces
-      .replace(/[\s_-]+/g, ' ') // Replace spaces and underscores with hyphens
-      
-  }
+      .replace(/[\s_-]+/g, " "); // Replace spaces and underscores with hyphens
+  };
 
   return (
     <Box sx={{ mb: 6 }}>
@@ -95,13 +93,23 @@ const Filters = ({
         </Grid>
 
         {/* Category Title */}
-        <Grid item xs={12} sm={4} display="flex" justifyContent="center">
+        <Grid
+          item
+          xs={12}
+          sm={4}
+          sx={{ display: { xs: "none", md: "flex" } }}
+          justifyContent="center"
+        >
           <Typography
             variant="h5"
             sx={{
               textTransform: "capitalize",
               color: "#ff4b39",
-              textAlign: "center",padding:2, boxShadow:3, borderRadius:2, fontWeight:"bold"
+              textAlign: "center",
+              padding: 2,
+              boxShadow: 3,
+              borderRadius: 2,
+              fontWeight: "bold",
             }}
           >
             {convertedCategorySlug(category)}
