@@ -60,7 +60,7 @@ const ProductActions = ({
           Add to Cart
         </Button>
       ) : (
-        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }} gap={3}>
+        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }} gap={{xs:2,md:3}}>
           <Button
             variant="contained"
             size="small"
@@ -77,6 +77,7 @@ const ProductActions = ({
           >
             Added to Cart
           </Button>
+          <Box sx={{display:"flex"}} gap={1}>
             <Icon
               onClick={handleDecreaseQuantity}
               sx={{
@@ -100,6 +101,7 @@ const ProductActions = ({
             >
               <AddCircleOutlineIcon />
             </Icon>
+            </Box>
           <Button
             size="small"
             variant="outlined"
@@ -107,7 +109,6 @@ const ProductActions = ({
             sx={{
               color: "#ff6f61",
               borderColor: "#ff6f61",
-              marginLeft: 2,
               "&:hover": {
                 color: "#ff4b36",
                 borderColor: "#ff4b36",

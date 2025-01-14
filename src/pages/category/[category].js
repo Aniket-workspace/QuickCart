@@ -105,7 +105,7 @@ const CategoryPage = ({
       />
 
       {/* Products Grid */}
-      <Grid container spacing={4}>
+      <Grid container spacing={{xs:1,md:4}}>
         {paginatedProducts.map((product) => (
           <Grid item xs={6} sm={6} md={3} key={product.id}>
             <ProductCard product={product} />
