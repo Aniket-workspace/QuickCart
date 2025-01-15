@@ -1,9 +1,9 @@
 import { Snackbar, Alert } from "@mui/material";
 
-const SnackbarNotification = ({ open, message, onClose,severity }) => {
-    
+const SnackbarNotification = ({ open, message, onClose, severity, key }) => {
   return (
     <Snackbar
+      key={message}
       open={open}
       autoHideDuration={3000}
       onClose={onClose}

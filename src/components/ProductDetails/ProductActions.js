@@ -2,7 +2,7 @@ import { Box, Button, Icon } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import BalanceIcon from "@mui/icons-material/Balance";
-import DeleteIcon  from "@mui/icons-material/Delete";
+import DeleteIcon from "@mui/icons-material/Delete";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
@@ -16,7 +16,7 @@ const ProductActions = ({
   product,
   cart,
   updateQuantity,
-  removeFromCart,
+  handleRemoveFromCart,
 }) => {
   // Find the item in the cart
   const cartItem = cart?.find((item) => item.id === product.id);
@@ -30,12 +30,6 @@ const ProductActions = ({
   const handleDecreaseQuantity = () => {
     if (cartItem && cartItem.quantity > 1) {
       updateQuantity(cartItem.id, cartItem.quantity - 1);
-    }
-  };
-
-  const handleRemoveFromCart = () => {
-    if (cartItem) {
-      removeFromCart(cartItem.id);
     }
   };
 
@@ -60,7 +54,14 @@ const ProductActions = ({
           Add to Cart
         </Button>
       ) : (
-        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }} gap={{xs:1,md:3}}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+          gap={{ xs: 1, md: 3 }}
+        >
           <Button
             variant="contained"
             size="small"
@@ -77,7 +78,7 @@ const ProductActions = ({
           >
             Added to Cart
           </Button>
-          <Box sx={{display:"flex"}} gap={1}>
+          <Box sx={{ display: "flex" }} gap={1}>
             <Icon
               onClick={handleDecreaseQuantity}
               sx={{
@@ -101,7 +102,7 @@ const ProductActions = ({
             >
               <AddCircleOutlineIcon />
             </Icon>
-            </Box>
+          </Box>
           <Button
             size="small"
             variant="outlined"
@@ -116,7 +117,7 @@ const ProductActions = ({
             }}
             onClick={handleRemoveFromCart}
           >
-            <DeleteIcon sx={{marginRight:1}}/>
+            <DeleteIcon sx={{ marginRight: 1 }} />
             Remove
           </Button>
         </Box>

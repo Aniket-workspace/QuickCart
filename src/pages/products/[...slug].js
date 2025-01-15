@@ -1,4 +1,4 @@
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 import { useCart } from "../../context/CartContext";
@@ -10,6 +10,7 @@ import ProductInfoSection from "@/components/ProductDetails/ProductInfoSection";
 import ProductActions from "@/components/ProductDetails/ProductActions";
 import SnackbarNotification from "@/components/ProductDetails/SnackbarNotification";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 const ProductDetailsPage = ({ product }) => {
   const router = useRouter();
@@ -46,6 +47,13 @@ const ProductDetailsPage = ({ product }) => {
     addToCart(product);
     setSnackbarMessage(`${product.title} added to cart!`);
     setSnackbarSeverity("success");
+    setOpenSnackbar(true);
+  };
+
+  const handleRemoveFromCart = () => {
+    removeFromCart(product.id);
+    setSnackbarMessage(`${product.title} removed from cart!`);
+    setSnackbarSeverity("error");
     setOpenSnackbar(true);
   };
 
@@ -89,39 +97,73 @@ const ProductDetailsPage = ({ product }) => {
   };
 
   return (
-    <Container sx={{ marginTop: 12, minHeight: "80vh" }}>
-      <Grid container spacing={3} >
-        <Grid item xs={12} sm={6}>
-          <MainImageSection
-            images={product.images}
-            mainImage={mainImage}
-            setMainImage={setMainImage}
-            title={product.title}
-          />
+    <>
+      <Head>
+        <title>{`${product.title} - Your Store`}</title>
+        <meta
+          name="description"
+          content={product.description || "Product details and specifications."}
+        />
+        <meta property="og:title" content={product.title} />
+        <meta
+          property="og:description"
+          content={
+            product.description || "Explore product features and details."
+          }
+        />
+        <meta
+          property="og:image"
+          content={product.images[0] || "default-image-url"}
+        />
+        <meta
+          property="og:url"
+          content={`https://yourstore.com/products/${product.slug}`}
+        />
+      </Head>
+      <Container sx={{ marginTop: 12, minHeight: "80vh" }}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={6}>
+            <MainImageSection
+              images={product.images}
+              mainImage={mainImage}
+              setMainImage={setMainImage}
+              title={product.title}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <ProductInfoSection product={product} />
+            <ProductActions
+              handleAddToCart={handleAddToCart}
+              handleWishlistClick={handleWishlistClick}
+              handleCompareClick={handleCompareClick}
+              isInWishlist={isInWishlist}
+              isInCompare={isInCompare}
+              isCompareDisabled={comparedProducts.length === 3 && !isInCompare}
+              product={product}
+              cart={cart}
+              updateQuantity={updateQuantity}
+              handleRemoveFromCart={handleRemoveFromCart}
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <ProductInfoSection product={product} />
-          <ProductActions
-            handleAddToCart={handleAddToCart}
-            handleWishlistClick={handleWishlistClick}
-            handleCompareClick={handleCompareClick}
-            isInWishlist={isInWishlist}
-            isInCompare={isInCompare}
-            isCompareDisabled={comparedProducts.length === 3 && !isInCompare}
-            product={product}
-            cart={cart}
-            updateQuantity={updateQuantity}
-            removeFromCart={removeFromCart}
-          />
-        </Grid>
-      </Grid>
-      <SnackbarNotification
-        open={openSnackbar}
-        message={snackbarMessage}
-        severity={snackbarSeverity}
-        onClose={() => setOpenSnackbar(false)}
-      />
-    </Container>
+        <SnackbarNotification
+          key={snackbarMessage} // Ensures new notification triggers properly
+          open={openSnackbar}
+          message={snackbarMessage}
+          severity={snackbarSeverity}
+          onClose={() => setOpenSnackbar(false)}
+          action={
+            <Button
+              color="inherit"
+              size="small"
+              onClick={() => setOpenSnackbar(false)}
+            >
+              CLOSE
+            </Button>
+          }
+        />
+      </Container>
+    </>
   );
 };
 

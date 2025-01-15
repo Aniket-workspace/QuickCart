@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { fetchProducts } from "../api/all-api";
 import Filters from "@/components/Filters";
 import ProductCard from "@/components/ProductCard/ProductCard";
+import Head from "next/head";
 
 const CategoryPage = ({
   category,
@@ -54,95 +55,127 @@ const CategoryPage = ({
     currentPage * productsPerPage
   );
 
-  const convertedCategorySlug = (title) => {
-    return title
-      .trim() // Remove leading and trailing spaces
-      .replace(/[\s_-]+/g, " "); // Replace spaces and underscores with hyphens
-  };
+  const convertedCategorySlug = (title) =>
+    title.replace(/[-_]+/g, " ").replace(/\s+/g, " ").trim();
 
   return (
-    <Container
-      maxWidth="lg"
-      sx={{ paddingTop: 4, marginTop: 7, minHeight: "80vh" }}
-    >
-      {/* Hero Section */}
-      <Box
-        sx={{
-          textAlign: "center",
-          background: "linear-gradient(135deg, #ff6f61, #ffcc00)",
-          padding: { xs: "30px 0", sm: "50px 0" },
-          borderRadius: "8px",
-          boxShadow: 3,
-          marginBottom: 6,
-        }}
+    <>
+      <Head>
+        <title>{`Shop ${convertedCategorySlug(
+          category
+        )} Products | Your Store`}</title>
+        <meta
+          name="description"
+          content={`Discover a wide range of products in the ${convertedCategorySlug(
+            category
+          )} category. Find the best deals and offers curated for you.`}
+        />
+        <meta
+          property="og:title"
+          content={`Shop ${convertedCategorySlug(category)} Products`}
+        />
+        <meta
+          property="og:description"
+          content={`Explore products in the ${convertedCategorySlug(
+            category
+          )} category. Best prices guaranteed!`}
+        />
+        <meta property="og:image" content="path_to_category_image.jpg" />
+        <meta
+          property="og:url"
+          content={`https://yourstore.com/categories/${category}`}
+        />
+      </Head>
+      <Container
+        maxWidth="lg"
+        sx={{ paddingTop: 4, marginTop: 7, minHeight: "80vh" }}
       >
-        <Typography
-          variant="h3"
+        {/* Hero Section */}
+        <Box
           sx={{
-            fontWeight: "bold",
-            color: "white",
-            fontSize: { xs: "2rem", sm: "3rem" },
-          }}
-        >
-          Shop the Latest Products
-        </Typography>
-        <Typography
-          variant="h6"
-          sx={{
-            color: "white",
-            marginTop: 1,
-            fontSize: { xs: "1rem", sm: "1.25rem" },
-          }}
-        >
-          Discover a wide range of products curated just for you!
-        </Typography>
-      </Box>
-
-      <Box sx={{display:{xs:"block",md:"none"}, marginBottom:4, marginTop:-3}}>
-        <Typography
-          variant="h5"
-          sx={{
-            textTransform: "capitalize",
-            color: "#ff4b39",
             textAlign: "center",
-            padding: 2,
+            background: "linear-gradient(135deg, #ff6f61, #ffcc00)",
+            padding: { xs: "30px 0", sm: "50px 0" },
+            borderRadius: "8px",
             boxShadow: 3,
-            borderRadius: 2,
-            fontWeight: "bold",
+            marginBottom: 6,
           }}
         >
-          {convertedCategorySlug(category)}
-        </Typography>
-      </Box>
+          <Typography
+            variant="h3"
+            sx={{
+              fontWeight: "bold",
+              color: "white",
+              fontSize: { xs: "2rem", sm: "3rem" },
+            }}
+          >
+            Shop the Latest Products
+          </Typography>
+          <Typography
+            variant="h6"
+            sx={{
+              color: "white",
+              marginTop: 1,
+              fontSize: { xs: "1rem", sm: "1.25rem" },
+            }}
+          >
+            Discover a wide range of products curated just for you!
+          </Typography>
+        </Box>
 
-      {/* Filters */}
+        <Box
+          sx={{
+            display: { xs: "block", md: "none" },
+            marginBottom: 4,
+            marginTop: -3,
+          }}
+        >
+          <Typography
+            variant="h5"
+            sx={{
+              textTransform: "capitalize",
+              color: "#ff4b39",
+              textAlign: "center",
+              padding: 2,
+              boxShadow: 3,
+              borderRadius: 2,
+              fontWeight: "bold",
+              fontSize: { xs: "1.5rem", sm: "2rem" },
+            }}
+          >
+            {convertedCategorySlug(category)}
+          </Typography>
+        </Box>
 
-      <Filters
-        priceRange={priceRange}
-        setPriceRange={setPriceRange}
-        sortOrder={sortOrder}
-        setSortOrder={setSortOrder}
-        category={category}
-        maxPrice={maxPrice}
-        initialPriceRange={[0, maxPrice]} // Pass the initial price range here
-      />
+        {/* Filters */}
 
-      {/* Products Grid */}
-      <Grid container spacing={{ xs: 1, md: 4 }}>
-        {paginatedProducts.map((product) => (
-          <Grid item xs={6} sm={6} md={3} key={product.id}>
-            <ProductCard product={product} />
-          </Grid>
-        ))}
-      </Grid>
+        <Filters
+          priceRange={priceRange}
+          setPriceRange={setPriceRange}
+          sortOrder={sortOrder}
+          setSortOrder={setSortOrder}
+          category={category}
+          maxPrice={maxPrice}
+          initialPriceRange={[0, maxPrice]} // Pass the initial price range here
+        />
 
-      {/* Pagination */}
-      <Pagination
-        currentPage={currentPage}
-        totalPages={Math.ceil(filteredProducts.length / productsPerPage)}
-        setCurrentPage={setCurrentPage}
-      />
-    </Container>
+        {/* Products Grid */}
+        <Grid container spacing={{ xs: 1, md: 4 }}>
+          {paginatedProducts.map((product) => (
+            <Grid item xs={6} sm={6} md={3} key={product.id}>
+              <ProductCard product={product} />
+            </Grid>
+          ))}
+        </Grid>
+
+        {/* Pagination */}
+        <Pagination
+          currentPage={currentPage}
+          totalPages={Math.ceil(filteredProducts.length / productsPerPage)}
+          setCurrentPage={setCurrentPage}
+        />
+      </Container>
+    </>
   );
 };
 export async function getServerSideProps({ params, query }) {

@@ -22,7 +22,7 @@ const IconButtons = ({ closeDrawer }) => {
         if (closeDrawer) closeDrawer();
       },
       icon: <ShoppingCartIcon />,
-      count: cart.length,
+      count: cart.reduce((total, item) => total + item.quantity, 0),
     },
     {
       title: "Wishlist",
