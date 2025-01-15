@@ -11,6 +11,8 @@ import ProductActions from "@/components/ProductDetails/ProductActions";
 import SnackbarNotification from "@/components/ProductDetails/SnackbarNotification";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import ReviewCard from "@/components/ProductDetails/ReviewCard";
+import ProductMarquee from "@/components/ProductDetails/ProductMarquee";
 
 const ProductDetailsPage = ({ product }) => {
   const router = useRouter();
@@ -96,6 +98,7 @@ const ProductDetailsPage = ({ product }) => {
     setOpenSnackbar(true);
   };
 
+  console.log(product.reviews);
   return (
     <>
       <Head>
@@ -145,22 +148,32 @@ const ProductDetailsPage = ({ product }) => {
               handleRemoveFromCart={handleRemoveFromCart}
             />
           </Grid>
+
+          <Grid
+            item
+            xs={12}
+            container
+            spacing={2}
+            mt={2}
+            justifyContent="flex-start"
+          >
+            {product.reviews.map((review, index) => (
+              <Grid item xs={12} sm={6} md={4} key={index}>
+                <ReviewCard reviewInfo={[review]} />
+              </Grid>
+            ))}
+          </Grid>
+
+          <Grid item xs={12} >
+            <ProductMarquee product={product} />
+          </Grid>
         </Grid>
         <SnackbarNotification
-          key={snackbarMessage} // Ensures new notification triggers properly
+          key={snackbarMessage}
           open={openSnackbar}
           message={snackbarMessage}
           severity={snackbarSeverity}
           onClose={() => setOpenSnackbar(false)}
-          action={
-            <Button
-              color="inherit"
-              size="small"
-              onClick={() => setOpenSnackbar(false)}
-            >
-              CLOSE
-            </Button>
-          }
         />
       </Container>
     </>
