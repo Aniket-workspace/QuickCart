@@ -40,3 +40,8 @@ a {
     color-scheme: dark;
   }
 }
+/* Custom Swiper Pagination */
+
+.swiper-pagination-bullet-active {
+  background-color: #ff6f61 !important; /* Active bullet color */
+}

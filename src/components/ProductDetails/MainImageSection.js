@@ -1,4 +1,12 @@
 import { Box } from "@mui/material";
+import Zoom from "react-medium-image-zoom";
+import "react-medium-image-zoom/dist/styles.css";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper/modules";
+// import "../../styles/"
 
 const MainImageSection = ({ images, mainImage, setMainImage, title }) => (
   <Box
@@ -9,35 +17,34 @@ const MainImageSection = ({ images, mainImage, setMainImage, title }) => (
       flexDirection: "column",
     }}
   >
+    {/* Main Image with Zoom */}
     <Box
       sx={{
         backgroundColor: "#ebebeb",
         borderRadius: 5,
         minHeight: 400,
-        display: "flex",
+        display: { xs: "none", sm: "flex" },
         alignContent: "center",
-        transition: "background-color 0.3s ease",
-        "&:hover": {
-          backgroundColor: "#ff6f61",
-        },
+        alignItems: "center",
       }}
     >
-      {/* Main Image */}
-      <img
-        src={mainImage}
-        alt={title}
-        style={{
-          maxHeight: 400,
-          width: "100%",
-          objectFit: "contain",
-          // marginBottom: 16,
-        }}
-      />
+      <Zoom>
+        <img
+          src={mainImage}
+          alt={title}
+          style={{
+            maxHeight: 400,
+            width: "100%",
+            objectFit: "contain",
+          }}
+        />
+      </Zoom>
     </Box>
-    {/* Thumbnails */}
+
+    {/* Thumbnail Gallery */}
     <Box
       sx={{
-        display: "flex",
+        display: { xs: "none", sm: "flex" },
         flexWrap: "wrap",
         justifyContent: "center",
         gap: 1,
@@ -60,6 +67,41 @@ const MainImageSection = ({ images, mainImage, setMainImage, title }) => (
           onClick={() => setMainImage(img)}
         />
       ))}
+    </Box>
+
+    {/* Swipe Gallery for Mobile */}
+    <Box
+      sx={{
+        display: { xs: "block", sm: "none" }, // Show only on small screens
+        width: "100%",
+      }}
+    >
+      <Swiper
+        modules={[Pagination]}
+        pagination={{
+          clickable: true,
+          bulletClass: "swiper-pagination-bullet",
+          bulletActiveClass: "swiper-pagination-bullet-active",
+        }}
+        spaceBetween={10}
+        slidesPerView={1}
+        onSlideChange={(swiper) => setMainImage(images[swiper.activeIndex])}
+      >
+        {images.map((img, index) => (
+          <SwiperSlide key={index}>
+            <img
+              src={img}
+              alt={`${title} slide`}
+              style={{
+                width: "100%",
+                height: "auto",
+                borderRadius: 5,
+                marginBottom: 10,
+              }}
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </Box>
   </Box>
 );

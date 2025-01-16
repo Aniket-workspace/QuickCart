@@ -24,14 +24,26 @@ const ProductMarquee = ({ product }) => {
 
   useEffect(() => {
     fetchMarqueeProducts();
-  }, []);
+  }, [product]);
 
   return (
-    <Box sx={{ width: "100%", overflow: "hidden", position: "relative",  marginTop:3 }}>
-      <Typography variant="h6" textAlign={"center"} mb={4} sx={{fontWeight:"bold", color:"#655967"}}>
+    <Box
+      sx={{
+        width: "100%",
+        overflow: "hidden",
+        position: "relative",
+        marginTop: 3,
+      }}
+    >
+      <Typography
+        variant="h6"
+        textAlign={"center"}
+        mb={4}
+        sx={{ fontWeight: "bold", color: "#655967" }}
+      >
         You may also like
       </Typography>
-      <Box 
+      <Box
         gap={2}
         sx={{
           display: "flex",
@@ -55,10 +67,10 @@ const ProductMarquee = ({ product }) => {
           const slug = useTitleToSlug(product.title);
           return (
             <Link key={index} href={`/products/${product.id}/${slug}`} passHref>
-              <Card 
+              <Card
                 sx={{
                   width: 130,
-                  height: 240,
+                  height: 200,
                   boxShadow: "none",
                   cursor: "pointer",
                   "&:hover": {
@@ -66,14 +78,18 @@ const ProductMarquee = ({ product }) => {
                     transition: "transform 0.3s ease",
                   },
                 }}
-                
               >
                 <CardMedia
                   component="img"
                   height="120"
                   image={product.images[0]}
                   alt={product.title}
-                  sx={{ objectFit: "contain", maxWidth: "100%",  backgroundColor:"#ebebeb", borderRadius:3}} 
+                  sx={{
+                    objectFit: "contain",
+                    maxWidth: "100%",
+                    backgroundColor: "#ebebeb",
+                    borderRadius: 3,
+                  }}
                 />
                 <Tooltip title={product.title} arrow>
                   <Typography
