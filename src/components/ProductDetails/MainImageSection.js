@@ -89,16 +89,27 @@ const MainImageSection = ({ images, mainImage, setMainImage, title }) => (
       >
         {images.map((img, index) => (
           <SwiperSlide key={index}>
-            <img
-              src={img}
-              alt={`${title} slide`}
-              style={{
-                width: "100%",
-                height: "auto",
+            <Box
+              sx={{
+                backgroundColor: "#ebebeb",
                 borderRadius: 5,
-                marginBottom: 10,
+                alignContent: "center",
+                alignItems: "center",
               }}
-            />
+            >
+              <Zoom>
+                <img
+                  src={img}
+                  alt={`${title} slide`}
+                  style={{
+                    width: "100%",
+                    height: "auto",
+                    borderRadius: 5,
+                    marginBottom: 10,
+                  }}
+                />{" "}
+              </Zoom>
+            </Box>
           </SwiperSlide>
         ))}
       </Swiper>
