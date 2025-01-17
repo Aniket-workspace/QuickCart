@@ -12,11 +12,7 @@ const ProductMarquee = ({ product }) => {
       const response = await axios.get(
         `https://dummyjson.com/products/category/${product.category}`
       );
-      setProducts(
-        response.data.products.filter(
-          (i) => i.category === product.category && i.id !== product.id
-        )
-      );
+      setProducts(response.data.products.filter((i) => i.id !== product.id));
     } catch (error) {
       console.error("Error fetching products:", error);
     }
@@ -49,11 +45,11 @@ const ProductMarquee = ({ product }) => {
           display: "flex",
           flexWrap: "nowrap",
           animation: "scroll 30s linear infinite",
-          "& > a": {
-            display: "block",
-            marginRight: 1,
-            textDecoration: "none",
-          },
+          // "& > a": {
+          //   display: "block",
+          //   marginRight: 1,
+          //   textDecoration: "none",
+          // },
           "&:hover": {
             animationPlayState: "paused",
           },
