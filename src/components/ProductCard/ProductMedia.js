@@ -14,7 +14,7 @@ const ProductMedia = ({ product }) => (
           right: 10,
           zIndex: 10,
           pointerEvents: "none",
-          fontSize: {xs:"10px",sm:""},
+          fontSize: { xs: "10px", sm: "" },
         }}
       />
     )}
@@ -26,7 +26,8 @@ const ProductMedia = ({ product }) => (
         color: "#fff",
         position: "absolute",
         margin: "10px 0 0 10px",
-        fontSize: {xs:"10px",sm:""},
+        fontSize: { xs: "10px", sm: "" },
+        zIndex: 10,
       }}
     />
     <CardMedia

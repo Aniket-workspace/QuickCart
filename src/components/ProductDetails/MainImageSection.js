@@ -31,6 +31,7 @@ const MainImageSection = ({ images, mainImage, setMainImage, title }) => {
           alignItems: "center",
           justifyContent: "center",
           width: "100%",
+          padding:2
         }}
       >
         <Swiper
@@ -82,15 +83,17 @@ const MainImageSection = ({ images, mainImage, setMainImage, title }) => {
           }}
         >
           {images.map((img, index) => (
-            <SwiperSlide key={index}>
+            <SwiperSlide key={index} style={{}}>
               <img
                 src={img}
                 alt={`${title} thumbnail`}
                 loading="lazy"
                 style={{
+                  height: 100,
                   width: "100%",
-                  height: "auto",
+                  // height: "auto",
                   borderRadius: 5,
+                  objectFit:"contain",
                   border:
                     mainImage === img ? "2px solid #ff6f61" : "2px solid #ddd",
                 }}
@@ -105,6 +108,8 @@ const MainImageSection = ({ images, mainImage, setMainImage, title }) => {
           display: { xs: "block", sm: "none" },
           width: "100%",
           position: "relative", // Ensure proper positioning for pagination
+          backgroundColor: "#ebebeb",
+          borderRadius: 5,
         }}
       >
         <Swiper
@@ -119,34 +124,36 @@ const MainImageSection = ({ images, mainImage, setMainImage, title }) => {
           spaceBetween={10}
           slidesPerView={1}
           onSlideChange={(swiper) => setMainImage(images[swiper.activeIndex])}
-          style={{
-            paddingBottom: 40, // Add bottom padding for pagination bullets
-          }}
+          style={
+            {
+              // paddingBottom: 40, // Add bottom padding for pagination bullets
+            }
+          }
         >
           {images.map((img, index) => (
             <SwiperSlide key={index}>
-              <Box
+              {/* <Box
                 sx={{
                   backgroundColor: "#ebebeb",
                   borderRadius: 5,
                   alignContent: "center",
                   alignItems: "center",
                 }}
-              >
-                <Zoom>
-                  <img
-                    src={img}
-                    loading="lazy"
-                    alt={`${title} slide`}
-                    style={{
-                      width: "100%",
-                      height: "auto",
-                      borderRadius: 5,
-                      marginBottom: 10,
-                    }}
-                  />
-                </Zoom>
-              </Box>
+              > */}
+              <Zoom>
+                <img
+                  src={img}
+                  loading="lazy"
+                  alt={`${title} slide`}
+                  style={{
+                    width: "100%",
+                    height: "auto",
+                    borderRadius: 5,
+                    marginBottom: 10,
+                  }}
+                />
+              </Zoom>
+              {/* </Box> */}
             </SwiperSlide>
           ))}
         </Swiper>

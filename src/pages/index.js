@@ -102,10 +102,16 @@ const Homepage = ({ categories }) => {
 
         <Grid container spacing={4}>
           {/* Sidebar Filter Section */}
-          <Grid item xs={12} sm={3}>
+          <Grid
+            item
+            xs={12}
+            sm={3}
+            sx={{
+              display: { xs: "none", sm: "block" }, // Hide on mobile
+            }}
+          >
             <Box
               sx={{
-                display: { xs: "none", sm: "block" }, // Hide on mobile
                 padding: 2,
                 backgroundColor: "#f9f9f9",
                 borderRadius: 2,
@@ -151,15 +157,23 @@ const Homepage = ({ categories }) => {
           </Grid>
 
           {/* Mobile Filter Button */}
-          <Box
+          <Grid
+            item
+            xs={12}
             gap={2}
             sx={{
               display: { xs: "flex", sm: "none" }, // Show only on mobile
-              marginBottom: 2,
-              justifyContent: "start",
+              // marginBottom: 2,
+              justifyContent: "space-between",
               alignItems: "center",
             }}
           >
+            <Typography
+              variant="h6"
+              sx={{ fontWeight: "bold", color: "#ff4b39" }}
+            >
+              Filter By Category
+            </Typography>
             <IconButton
               onClick={toggleDrawer(true)}
               size="small"
@@ -168,18 +182,11 @@ const Homepage = ({ categories }) => {
                 border: "1px solid #ff6f61",
                 // padding: "8px",
                 borderRadius: "50%",
-                marginLeft: 4,
+                // marginLeft: 4,
               }}
             >
               <MenuIcon />
             </IconButton>
-
-            <Typography
-              variant="h6"
-              sx={{ fontWeight: "bold", color: "#ff4b39" }}
-            >
-              Filter By Category
-            </Typography>
 
             <Drawer
               anchor="left"
@@ -249,7 +256,7 @@ const Homepage = ({ categories }) => {
                 </FormGroup>
               </Box>
             </Drawer>
-          </Box>
+          </Grid>
 
           {/* Main Category Display Section */}
           <Grid item xs={12} sm={9}>
@@ -257,7 +264,7 @@ const Homepage = ({ categories }) => {
               sx={{
                 display: "grid",
                 gridTemplateColumns: {
-                  xs: "repeat(2, 1fr)", // 2 cards per row on small screens
+                  // xs: "repeat(2, 1fr)", // 2 cards per row on small screens
                   sm: "repeat(auto-fill, minmax(250px, 1fr))", // Auto-fill for larger screens
                 },
                 gap: { xs: 1, sm: 4 },
