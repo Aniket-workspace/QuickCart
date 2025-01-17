@@ -1,12 +1,29 @@
-import { Container, Grid, Box, Typography, FormGroup, FormControlLabel, Checkbox } from "@mui/material";
+import {
+  Container,
+  Grid,
+  Box,
+  Typography,
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
+  Button,
+  Drawer,
+  IconButton,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu"; // Import menu icon
+import { useState } from "react";
 import { useCategory } from "@/context/CategoryContext";
 import { fetchCategories } from "./api/all-api";
 import CategoryCard from "@/components/CategoryCard";
 import Head from "next/head"; // Import next/head
+import CloseIcon from "@mui/icons-material/Close";
 
 const Homepage = ({ categories }) => {
   const validCategories = categories || [];
   const { selectedCategories, toggleCategory } = useCategory();
+
+  // State for mobile filter drawer
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   // Filtered categories based on selected filters
   const filteredCategories = selectedCategories.length
@@ -14,6 +31,16 @@ const Homepage = ({ categories }) => {
         selectedCategories.includes(category.slug)
       )
     : validCategories;
+
+  const toggleDrawer = (open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setIsDrawerOpen(open);
+  };
 
   return (
     <>
@@ -36,7 +63,10 @@ const Homepage = ({ categories }) => {
         <meta property="og:url" content="https://www.yourstore.com" />
       </Head>
 
-      <Container maxWidth="lg" sx={{ paddingTop: 4, marginTop: 7, minHeight: "80vh" }}>
+      <Container
+        maxWidth="lg"
+        sx={{ paddingTop: 4, marginTop: 7, minHeight: "80vh" }}
+      >
         {/* Hero Section with Gradient Background */}
         <Box
           sx={{
@@ -75,6 +105,7 @@ const Homepage = ({ categories }) => {
           <Grid item xs={12} sm={3}>
             <Box
               sx={{
+                display: { xs: "none", sm: "block" }, // Hide on mobile
                 padding: 2,
                 backgroundColor: "#f9f9f9",
                 borderRadius: 2,
@@ -119,13 +150,117 @@ const Homepage = ({ categories }) => {
             </Box>
           </Grid>
 
+          {/* Mobile Filter Button */}
+          <Box
+            gap={2}
+            sx={{
+              display: { xs: "flex", sm: "none" }, // Show only on mobile
+              marginBottom: 2,
+              justifyContent: "start",
+              alignItems: "center",
+            }}
+          >
+            <IconButton
+              onClick={toggleDrawer(true)}
+              size="small"
+              sx={{
+                color: "#ff6f61",
+                border: "1px solid #ff6f61",
+                // padding: "8px",
+                borderRadius: "50%",
+                marginLeft: 4,
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+
+            <Typography
+              variant="h6"
+              sx={{ fontWeight: "bold", color: "#ff4b39" }}
+            >
+              Filter By Category
+            </Typography>
+
+            <Drawer
+              anchor="left"
+              open={isDrawerOpen}
+              onClose={toggleDrawer(false)}
+            >
+              <Box
+                sx={{
+                  width: 250,
+                  padding: 2,
+                }}
+                role="presentation"
+              >
+                <Box
+                  gap={2}
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginBottom: 2,
+                  }}
+                >
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      fontWeight: "bold",
+                      color: "#ff4b39",
+                      fontSize: "1.2rem",
+                    }}
+                  >
+                    Filter by Category
+                  </Typography>
+
+                  <IconButton
+                    onClick={toggleDrawer(false)}
+                    size="small"
+                    sx={{
+                      color: "#ff6f61",
+                      border: "1px solid #ff6f61",
+                      borderRadius: "50%",
+                    }}
+                  >
+                    <CloseIcon />
+                  </IconButton>
+                </Box>
+                <FormGroup>
+                  {validCategories.map((category) => (
+                    <FormControlLabel
+                      key={category.slug}
+                      control={
+                        <Checkbox
+                          name={category.slug}
+                          checked={selectedCategories.includes(category.slug)}
+                          onChange={() => toggleCategory(category.slug)}
+                          sx={{
+                            color: "#ff6f61",
+                            "&.Mui-checked": {
+                              color: "#ff6f61",
+                            },
+                          }}
+                        />
+                      }
+                      label={category.name}
+                      sx={{ textTransform: "capitalize" }}
+                    />
+                  ))}
+                </FormGroup>
+              </Box>
+            </Drawer>
+          </Box>
+
           {/* Main Category Display Section */}
           <Grid item xs={12} sm={9}>
             <Box
               sx={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
-                gap: 4,
+                gridTemplateColumns: {
+                  xs: "repeat(2, 1fr)", // 2 cards per row on small screens
+                  sm: "repeat(auto-fill, minmax(250px, 1fr))", // Auto-fill for larger screens
+                },
+                gap: { xs: 1, sm: 4 },
               }}
             >
               {filteredCategories.length > 0 ? (

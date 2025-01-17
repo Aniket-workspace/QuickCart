@@ -28,6 +28,7 @@ const CategoryCard = ({ validCategories }) => {
                 fontWeight: "bold",
                 color: "#ff4b39",
                 textTransform: "capitalize",
+                fontSize:{xs:"1rem",sm:"1.25rem"}
               }}
             >
               {category.name}
