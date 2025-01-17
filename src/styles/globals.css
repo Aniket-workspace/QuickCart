@@ -45,3 +45,19 @@ a {
 .swiper-pagination-bullet-active {
   background-color: #ff6f61 !important; /* Active bullet color */
 }
+
+.css-1l5xwdx-MuiButtonBase-root-MuiPaginationItem-root {
+  color: #312a29;
+}
+
+.css-1l5xwdx-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+  background-color: #ff4b39;
+}
+
+.css-1l5xwdx-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected:hover {
+  background-color: #ff6f61;
+}
+
+.css-1l5xwdx-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+  color: #fff;
+}

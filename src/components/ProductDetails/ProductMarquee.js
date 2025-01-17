@@ -39,7 +39,7 @@ const ProductMarquee = ({ product }) => {
         variant="h6"
         textAlign={"center"}
         mb={4}
-        sx={{ fontWeight: "bold", color: "#655967" }}
+        sx={{ fontWeight: "bold", color: "#312a29" }}
       >
         You may also like
       </Typography>

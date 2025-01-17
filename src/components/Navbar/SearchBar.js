@@ -7,7 +7,6 @@ import {
   Typography,
   ListItemButton,
   ListItem,
-  Divider,
   Tooltip,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
@@ -109,7 +108,7 @@ const SearchBar = ({ searchQuery, setSearchQuery, onSearch }) => {
                       <Box sx={{ overflow: "hidden" }}>
                         <Typography
                           variant="body2"
-                          color="#655967"
+                          color="#312a29"
                           sx={{
                             whiteSpace: "nowrap",
                             overflow: "hidden",
@@ -119,7 +118,7 @@ const SearchBar = ({ searchQuery, setSearchQuery, onSearch }) => {
                           {product.title}
                         </Typography>
                         <Typography variant="caption" color="text.secondary">
-                          {product.price} USD
+                          ${product.price}
                         </Typography>
                       </Box>
                     </Tooltip>

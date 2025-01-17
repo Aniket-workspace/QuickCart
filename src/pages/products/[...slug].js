@@ -127,6 +127,7 @@ const ProductDetailsPage = ({ product }) => {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
             <MainImageSection
+              key={product.id} // Ensure re-initialization of Swiper components
               images={product.images}
               mainImage={mainImage}
               setMainImage={setMainImage}
@@ -164,7 +165,7 @@ const ProductDetailsPage = ({ product }) => {
             ))}
           </Grid>
 
-          <Grid item xs={12} >
+          <Grid item xs={12}>
             <ProductMarquee product={product} />
           </Grid>
         </Grid>

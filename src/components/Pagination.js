@@ -6,6 +6,8 @@ import { Pagination as MuiPagination } from "@mui/material";
 const Pagination = ({ currentPage, totalPages, setCurrentPage  }) => {
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
+    window.scroll(0, 0);
+
   };
 
   return (

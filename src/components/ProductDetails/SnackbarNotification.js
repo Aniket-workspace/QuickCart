@@ -7,7 +7,7 @@ const SnackbarNotification = ({ open, message, onClose, severity, key }) => {
       open={open}
       autoHideDuration={3000}
       onClose={onClose}
-      anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      anchorOrigin={{ vertical: "top", horizontal: "left" }}
     >
       <Alert onClose={onClose} severity={severity} sx={{ width: "100%" }}>
         {message}

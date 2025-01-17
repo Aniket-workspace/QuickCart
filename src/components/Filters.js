@@ -20,19 +20,27 @@ const Filters = ({
   maxPrice,
   initialPriceRange, // New prop for initial price range
 }) => {
-  const handleMinPriceChange = (event) => {
-    const minPrice =
-      event.target.value === "" ? "" : Math.max(0, Number(event.target.value));
+const handleMinPriceChange = (event) => {
+  const inputValue = event.target.value;
+  if (/^\d*$/.test(inputValue)) {
+    // Only update if the input is a valid number or empty
+    const minPrice = inputValue === "" ? "" : Math.max(0, Number(inputValue));
     setPriceRange([minPrice, priceRange[1]]);
-  };
+  }
+};
 
-  const handleMaxPriceChange = (event) => {
+const handleMaxPriceChange = (event) => {
+  const inputValue = event.target.value;
+  if (/^\d*$/.test(inputValue)) {
+    // Only update if the input is a valid number or empty
     const maxPriceValue =
-      event.target.value === ""
+      inputValue === ""
         ? ""
-        : Math.max(priceRange[0], Number(event.target.value));
+        : Math.max(priceRange[0], Number(inputValue));
     setPriceRange([priceRange[0], maxPriceValue]);
-  };
+  }
+};
+
 
   const handleSortOrderChange = (event) => {
     setSortOrder(event.target.value);

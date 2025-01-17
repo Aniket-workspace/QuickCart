@@ -10,7 +10,7 @@ const Logo = ({onClick}) => (
         variant="h6"
         sx={{
           fontWeight: "bold",
-          color: "#655967",
+          color: "#312a29",
           textDecoration: "none",
           fontSize: { xs: "1rem", sm: "1.5rem" },
           backgroundColor: "#fff",

@@ -13,7 +13,7 @@ const ProductInfo = ({ product }) => {
           variant="body1"
           sx={{
             fontWeight: "bold",
-            color: "#655967",
+            color: "#312a29",
             marginBottom: 1,
             cursor: "pointer",
             fontSize: { xs: "0.875rem", sm: "1rem" },

@@ -40,7 +40,7 @@ const ReviewCard = ({ reviewInfo }) => {
               alt={review.reviewerName}
               sx={{ width: 40, height: 40, mr: 2, backgroundColor: "#ff6f61" }}
             >{`${initials[0].charAt(0)}${initials[1].charAt(0)}`}</Avatar>
-            <Box sx={{ flexGrow: 1, color: "#655967" }}>
+            <Box sx={{ flexGrow: 1, color: "#312a29" }}>
               <Typography variant="subtitle1" fontWeight="bold">
                 {review.reviewerName}
               </Typography>

@@ -13,7 +13,7 @@ const ProductInfoSection = ({ product }) => {
         gutterBottom
         sx={{
           fontWeight: "bold",
-          color: "#655967",
+          color: "#312a29",
         }}
       >
         {product.title}
