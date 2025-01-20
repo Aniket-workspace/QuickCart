@@ -82,20 +82,27 @@ const ProductDetailsPage = ({ product }) => {
         `You can only compare products in the "${comparedProducts[0].category}" category.`
       );
       setSnackbarSeverity("error");
+      setOpenSnackbar(true);
+      return; // Exit the function here to prevent the toggle
     } else if (isInCompare) {
       removeFromCompare(product.id);
       setSnackbarMessage(`${product.title} removed from compare.`);
       setSnackbarSeverity("error");
+      setOpenSnackbar(true);
     } else if (comparedProducts.length < 3) {
       addToCompare(product);
       setSnackbarMessage(`${product.title} added to compare.`);
       setSnackbarSeverity("success");
+      setOpenSnackbar(true);
     } else {
       setSnackbarMessage("You can compare a maximum of 3 products.");
       setSnackbarSeverity("error");
+      setOpenSnackbar(true);
+      return; // Exit the function here to prevent the toggle
     }
+
+    // Toggle the 'isInCompare' only after adding/removing
     setIsInCompare(!isInCompare);
-    setOpenSnackbar(true);
   };
 
   console.log(product.reviews);
