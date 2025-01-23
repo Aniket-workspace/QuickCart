@@ -8,6 +8,8 @@ import { fetchProducts } from "../api/all-api";
 import Filters from "@/components/Filters";
 import ProductCard from "@/components/ProductCard/ProductCard";
 import Head from "next/head";
+import { usePathname } from "next/navigation";
+import BreadCrumb from "@/components/BreadCrumb";
 
 const CategoryPage = ({
   category,
@@ -15,6 +17,8 @@ const CategoryPage = ({
   initialSortOrder,
   maxPrice,
 }) => {
+  const path = usePathname();
+
   const [currentPage, setCurrentPage] = useState(1);
   const [products, setProducts] = useState(initialProducts);
   const [filteredProducts, setFilteredProducts] = useState(initialProducts);
@@ -90,6 +94,9 @@ const CategoryPage = ({
         maxWidth="lg"
         sx={{ paddingTop: 4, marginTop: 7, minHeight: "80vh" }}
       >
+        <Box mb={2}>
+        <BreadCrumb path={path}/>
+        </Box>
         {/* Hero Section */}
         <Box
           sx={{

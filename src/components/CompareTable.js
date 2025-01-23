@@ -16,7 +16,7 @@ import {
 import { useCart } from "../context/CartContext";
 import Link from "next/link";
 import Image from "next/image";
-import { useTitleToSlug } from "@/customHooks/useTitleToSlug";
+import { convertTitleToSlug } from "@/customHooks/convertTitleToSlug";
 
 const CompareTable = ({ comparedProducts, removeFromCompare }) => {
   const { addToCart } = useCart();
@@ -44,11 +44,11 @@ const CompareTable = ({ comparedProducts, removeFromCompare }) => {
             <TableRow>
               <TableCell align="center">Product</TableCell>
               {comparedProducts.map((product) => {
-                const slug = useTitleToSlug(product.title);
+                const slug = convertTitleToSlug(product.title);
 
                 return (
                   <TableCell key={product.id} align="center">
-                    <Link href={`/products/${product.id}/${slug}`} passHref>
+                    <Link href={`/products/${slug}/${product.id}`} passHref>
                       {/* image */}
                       <Image
                         src={product.images[0]}

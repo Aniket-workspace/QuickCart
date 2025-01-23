@@ -13,10 +13,14 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import ReviewCard from "@/components/ProductDetails/ReviewCard";
 import ProductMarquee from "@/components/ProductDetails/ProductMarquee";
+import BreadCrumb from "@/components/BreadCrumb";
+import { usePathname } from "next/navigation";
 
 const ProductDetailsPage = ({ product }) => {
   const router = useRouter();
   const { slug } = router.query;
+
+  const path = usePathname()
 
   const { cart, addToCart, updateQuantity, removeFromCart } = useCart();
   const { wishlist, addToWishlist, removeFromWishlist } = useWishlist();
@@ -132,6 +136,9 @@ const ProductDetailsPage = ({ product }) => {
       </Head>
       <Container sx={{ marginTop: 12, minHeight: "80vh" }}>
         <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <BreadCrumb path={path}/>
+          </Grid>
           <Grid item xs={12} sm={6}>
             <MainImageSection
               key={product.id} // Ensure re-initialization of Swiper components
@@ -189,7 +196,7 @@ const ProductDetailsPage = ({ product }) => {
 };
 
 export async function getServerSideProps({ params }) {
-  const product = await fetchProductDetails(params.slug[0]);
+  const product = await fetchProductDetails(params.slug[1]);
 
   return {
     props: { product },

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Box, Card, CardMedia, Tooltip, Typography } from "@mui/material";
 import axios from "axios";
 import Link from "next/link";
-import { useTitleToSlug } from "@/customHooks/useTitleToSlug";
+import { convertTitleToSlug } from "@/customHooks/convertTitleToSlug";
 
 const ProductMarquee = ({ product }) => {
   const [products, setProducts] = useState([]);
@@ -21,6 +21,8 @@ const ProductMarquee = ({ product }) => {
   useEffect(() => {
     fetchMarqueeProducts();
   }, [product]);
+
+
 
   return (
     <Box
@@ -60,9 +62,9 @@ const ProductMarquee = ({ product }) => {
         }}
       >
         {products.map((product, index) => {
-          const slug = useTitleToSlug(product.title);
+          const slug = convertTitleToSlug(product?.title);
           return (
-            <Link key={index} href={`/products/${product.id}/${slug}`} passHref>
+            <Link key={index} href={`/products/${slug}/${product.id}`} passHref>
               <Card
                 sx={{
                   width: 130,

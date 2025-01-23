@@ -14,7 +14,7 @@ import { useRouter } from "next/router";
 import { searchProduct } from "../../pages/api/all-api"; // Adjust the path if needed
 import debounce from "lodash.debounce";
 import Link from "next/link";
-import { useTitleToSlug } from "@/customHooks/useTitleToSlug";
+import { convertTitleToSlug } from "@/customHooks/convertTitleToSlug";
 
 const SearchBar = ({ searchQuery, setSearchQuery, onSearch }) => {
   const router = useRouter();
@@ -88,10 +88,10 @@ const SearchBar = ({ searchQuery, setSearchQuery, onSearch }) => {
           }}
         >
           {suggestions.map((product) => {
-            const slug = useTitleToSlug(product.title);
+            const slug = convertTitleToSlug(product.title);
 
             return (
-              <Link href={`/products/${product.id}/${slug}`} key={product.id}>
+              <Link href={`/products/${slug}/${product.id}`} key={product.id}>
                 <ListItem>
                   {" "}
                   <ListItemButton

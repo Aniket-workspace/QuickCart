@@ -13,15 +13,16 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useCart } from "../context/CartContext";
 import Link from "next/link";
 import Image from "next/image";
-import { useTitleToSlug } from "@/customHooks/useTitleToSlug";
+import { convertTitleToSlug } from "@/customHooks/convertTitleToSlug";
 
 const WishlistItem = ({ wishlist, removeFromWishlist }) => {
   const { addToCart } = useCart();
 
+
   return (
     <List sx={{ marginBottom: "20px" }}>
       {wishlist.map((item) => {
-        const slug = useTitleToSlug(item.title);
+        const slug = convertTitleToSlug(item.title);
 
         return (
           <ListItem
@@ -35,7 +36,7 @@ const WishlistItem = ({ wishlist, removeFromWishlist }) => {
             }}
           >
             {/* Item Details */}
-            <Link href={`/products/${item.id}/${slug}`} passHref>
+            <Link href={`/products/${slug}/${item.id}`} passHref>
               <Box
                 sx={{
                   display: "flex",

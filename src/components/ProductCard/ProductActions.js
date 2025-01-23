@@ -25,11 +25,11 @@ const ProductActions = ({
     if (isInCart) {
       removeFromCart(product.id);
       setSnackbarSeverity("error");
-      setSnackbarMessage(`${product.title} removed from cart.`);
+      setSnackbarMessage(`${truncateTitle(product.title)} removed from cart.`);
     } else {
       addToCart(product);
       setSnackbarSeverity("success");
-      setSnackbarMessage(`${product.title} added to cart.`);
+      setSnackbarMessage(`${truncateTitle(product.title)} added to cart.`);
     }
     setOpenSnackbar(true);
   };
@@ -38,11 +38,11 @@ const ProductActions = ({
     if (isInWishlist) {
       removeFromWishlist(product.id);
       setSnackbarSeverity("error");
-      setSnackbarMessage(`${product.title} removed from wishlist.`);
+      setSnackbarMessage(`${truncateTitle(product.title)} removed from wishlist.`);
     } else {
       addToWishlist(product);
       setSnackbarSeverity("success");
-      setSnackbarMessage(`${product.title} added to wishlist.`);
+      setSnackbarMessage(`${truncateTitle(product.title)} added to wishlist.`);
     }
     setOpenSnackbar(true);
   };
@@ -64,17 +64,27 @@ const ProductActions = ({
     setSnackbarSeverity("success");
     if (isInCompare) {
       removeFromCompare(product.id);
-      setSnackbarMessage(`${product.title} removed from compare.`);
+      setSnackbarMessage(`${truncateTitle(product.title)} removed from compare.`);
     } else {
       if (comparedProducts.length < 3) {
         addToCompare(product);
-        setSnackbarMessage(`${product.title} added to compare.`);
+        setSnackbarMessage(`${truncateTitle(product.title)} added to compare.`);
       } else {
         setSnackbarMessage("You can compare a maximum of 3 products.");
       }
     }
     setOpenSnackbar(true);
   };
+
+
+    // Function to truncate title to 3 words
+    const truncateTitle = (title) => {
+      const words = title.split(" ");
+      if (words.length > 3) {
+        return words.slice(0, 2).join(" ") + "...";
+      }
+      return title;
+    };
 
   return (
     <Box

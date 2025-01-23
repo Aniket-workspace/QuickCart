@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { useCompare } from "@/context/CompareContext";
-import { useTitleToSlug } from "@/customHooks/useTitleToSlug";
+import { convertTitleToSlug } from "@/customHooks/convertTitleToSlug";
 import ProductMedia from "./ProductMedia";
 import ProductInfo from "./ProductInfo";
 import ProductActions from "./ProductActions";
@@ -60,7 +60,7 @@ const ProductCard = ({ product }) => {
     setIsInCompare(comparedProducts.some((item) => item.id === product.id));
   }, [wishlist, comparedProducts, cart]);
 
-  const slug = useTitleToSlug(product.title);
+  const slug = convertTitleToSlug(product?.title);
 
   return (
     <>
@@ -78,12 +78,12 @@ const ProductCard = ({ product }) => {
           },
           backgroundColor: "background.paper",
           border: "1px solid #ddd",
-          height: {xs:290,sm:325},
+          height: { xs: 290, sm: 325 },
         }}
         onMouseEnter={() => setShowIcons(true)}
         onMouseLeave={() => setShowIcons(false)}
       >
-        <Link href={`/products/${product.id}/${slug}`} passHref>
+        <Link href={`/products/${slug}/${product.id}`} passHref>
           <ProductMedia product={product} />
           <CardContent
             sx={{
@@ -96,9 +96,7 @@ const ProductCard = ({ product }) => {
           </CardContent>
         </Link>
 
-        {product.hotDeal && (
-          <CountdownTimer timeLeft={timeLeft} />
-        )}
+        {product.hotDeal && <CountdownTimer timeLeft={timeLeft} />}
 
         {showIcons && (
           <ProductActions

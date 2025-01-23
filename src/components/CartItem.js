@@ -12,14 +12,14 @@ import Image from "next/image";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { useTitleToSlug } from "@/customHooks/useTitleToSlug";
+import { convertTitleToSlug } from "@/customHooks/convertTitleToSlug";
 
 const CartItem = ({ cart, updateQuantity, removeFromCart }) => {
   return (
     <List sx={{ marginBottom: "20px" }}>
       {/* Cart Items List */}
       {cart.map((item) => {
-        const slug = useTitleToSlug(item.title); 
+        const slug = convertTitleToSlug(item.title); 
         return (
           <ListItem
             key={item.id}
@@ -33,7 +33,7 @@ const CartItem = ({ cart, updateQuantity, removeFromCart }) => {
           >
             {/* Item Details */}
             <Link
-              href={`/products/${item.id}/${slug}`}
+              href={`/products/${slug}/${item.id}`}
               passHref
             >
               <Box
