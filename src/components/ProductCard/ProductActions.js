@@ -5,6 +5,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
+import Zoom from "@mui/material/Zoom";
 
 const ProductActions = ({
   product,
@@ -19,7 +20,8 @@ const ProductActions = ({
   removeFromCompare,
   setOpenSnackbar,
   setSnackbarMessage,
-  setSnackbarSeverity,comparedProducts
+  setSnackbarSeverity,
+  comparedProducts,
 }) => {
   const handleAddToCart = () => {
     if (isInCart) {
@@ -38,7 +40,9 @@ const ProductActions = ({
     if (isInWishlist) {
       removeFromWishlist(product.id);
       setSnackbarSeverity("error");
-      setSnackbarMessage(`${truncateTitle(product.title)} removed from wishlist.`);
+      setSnackbarMessage(
+        `${truncateTitle(product.title)} removed from wishlist.`
+      );
     } else {
       addToWishlist(product);
       setSnackbarSeverity("success");
@@ -64,7 +68,9 @@ const ProductActions = ({
     setSnackbarSeverity("success");
     if (isInCompare) {
       removeFromCompare(product.id);
-      setSnackbarMessage(`${truncateTitle(product.title)} removed from compare.`);
+      setSnackbarMessage(
+        `${truncateTitle(product.title)} removed from compare.`
+      );
     } else {
       if (comparedProducts.length < 3) {
         addToCompare(product);
@@ -76,15 +82,14 @@ const ProductActions = ({
     setOpenSnackbar(true);
   };
 
-
-    // Function to truncate title to 3 words
-    const truncateTitle = (title) => {
-      const words = title.split(" ");
-      if (words.length > 3) {
-        return words.slice(0, 2).join(" ") + "...";
-      }
-      return title;
-    };
+  // Function to truncate title to 3 words
+  const truncateTitle = (title) => {
+    const words = title.split(" ");
+    if (words.length > 3) {
+      return words.slice(0, 2).join(" ") + "...";
+    }
+    return title;
+  };
 
   return (
     <Box
@@ -109,11 +114,23 @@ const ProductActions = ({
         }}
       >
         {isInCart ? (
-          <Tooltip title={"Remove From Cart"} arrow>
+          <Tooltip
+            title={"Remove From Cart"}
+            arrow
+            slots={{
+              transition: Zoom,
+            }}
+          >
             <RemoveShoppingCartIcon />
           </Tooltip>
         ) : (
-          <Tooltip title={"Add To Cart"} arrow>
+          <Tooltip
+            title={"Add To Cart"}
+            arrow
+            slots={{
+              transition: Zoom,
+            }}
+          >
             <AddShoppingCartIcon />
           </Tooltip>
         )}
@@ -125,11 +142,23 @@ const ProductActions = ({
         }}
       >
         {isInWishlist ? (
-          <Tooltip title={"Remove From Wishlist"} arrow>
+          <Tooltip
+            title={"Remove From Wishlist"}
+            arrow
+            slots={{
+              transition: Zoom,
+            }}
+          >
             <FavoriteIcon />
           </Tooltip>
         ) : (
-          <Tooltip title={"Add To Wishlist"} arrow>
+          <Tooltip
+            title={"Add To Wishlist"}
+            arrow
+            slots={{
+              transition: Zoom,
+            }}
+          >
             <FavoriteBorderIcon />
           </Tooltip>
         )}
@@ -142,11 +171,23 @@ const ProductActions = ({
         }}
       >
         {isInCompare ? (
-          <Tooltip title={"Remove From Compare"} arrow>
+          <Tooltip
+            title={"Remove From Compare"}
+            arrow
+            slots={{
+              transition: Zoom,
+            }}
+          >
             <RemoveCircleIcon />
           </Tooltip>
         ) : (
-          <Tooltip title={"Add To Compare "} arrow>
+          <Tooltip
+            title={"Add To Compare "}
+            arrow
+            slots={{
+              transition: Zoom,
+            }}
+          >
             <CompareArrowsIcon />
           </Tooltip>
         )}

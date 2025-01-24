@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box } from "@mui/material";
+import { Box, Paper } from "@mui/material";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
 import "swiper/css";
@@ -22,10 +22,10 @@ const MainImageSection = ({ images, mainImage, setMainImage, title }) => {
       }}
     >
       {/* Main Image Swiper */}
-      <Box
+      <Box component={Paper} elevation={2}
         sx={{
           backgroundColor: "#ebebeb",
-          borderRadius: 5,
+          // borderRadius: 5,
           minHeight: 400,
           display: { xs: "none", sm: "flex" },
           alignItems: "center",

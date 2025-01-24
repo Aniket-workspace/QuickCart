@@ -8,6 +8,7 @@ import {
   ListItemButton,
   ListItem,
   Tooltip,
+  Paper,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { useRouter } from "next/router";
@@ -48,7 +49,7 @@ const SearchBar = ({ searchQuery, setSearchQuery, onSearch }) => {
   };
 
   return (
-    <Box sx={{ position: "relative", width: "100%" }}>
+    <Box sx={{ position: "relative", width: "100%", color:"inherit"}}>
       <form
         onSubmit={handleSearch}
         style={{ display: "flex", alignItems: "center", width: "100%" }}
@@ -57,16 +58,17 @@ const SearchBar = ({ searchQuery, setSearchQuery, onSearch }) => {
           sx={{
             ml: 1,
             flex: 1,
-            color: "white",
-            border: "1px solid white",
+            color: "inherit",
+            border: "1px solid ",
             borderRadius: "4px",
             padding: "0 8px",
+            borderColor:"inherit"
           }}
           placeholder="Search products"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-        <IconButton type="submit" sx={{ p: 1, color: "white" }}>
+        <IconButton type="submit" sx={{ p: 1, color: "inherit" }}>
           <SearchIcon />
         </IconButton>
       </form>
@@ -80,11 +82,13 @@ const SearchBar = ({ searchQuery, setSearchQuery, onSearch }) => {
             left: 0,
             width: "100%",
             backgroundColor: "#fff",
-            boxShadow: 1,
+            boxShadow: 8,
             zIndex: 10,
             borderRadius: "4px",
             maxHeight: "200px",
             overflowY: "auto",
+            padding:"10px 0"
+            
           }}
         >
           {suggestions.map((product) => {

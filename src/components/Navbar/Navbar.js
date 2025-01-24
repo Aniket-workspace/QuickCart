@@ -11,6 +11,7 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   return (
     <AppBar position="fixed" sx={{ backgroundColor: "#ff6f61", boxShadow: 2 }}>
@@ -58,10 +59,12 @@ const Navbar = () => {
         <MobileMenu
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
-          onClose={toggleMobileMenu}
+          onClose={closeMobileMenu}
+          isOpen={isMobileMenuOpen}
         />
       )}
     </AppBar>
   );
 };
+
 export default Navbar;

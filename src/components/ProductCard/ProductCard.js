@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Card, CardContent, Box } from "@mui/material";
+import { Card, CardContent, Box, Paper } from "@mui/material";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
@@ -64,17 +64,17 @@ const ProductCard = ({ product }) => {
 
   return (
     <>
-      <Card
+      <Box component={Paper} elevation={6}
         sx={{
           position: "relative",
           display: "flex",
           flexDirection: "column",
-          borderRadius: 2,
-          boxShadow: 3,
+          // borderRadius: 2,
+          // boxShadow: 3,
           transition: "transform 0.3s ease-in-out",
           "&:hover": {
             transform: "scale(1.01)",
-            boxShadow: 6,
+            // boxShadow: 6,
           },
           backgroundColor: "background.paper",
           border: "1px solid #ddd",
@@ -116,7 +116,7 @@ const ProductCard = ({ product }) => {
             comparedProducts={comparedProducts}
           />
         )}
-      </Card>
+      </Box>
 
       <SnackbarNotification
         open={openSnackbar}

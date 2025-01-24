@@ -1,4 +1,4 @@
-import { Box, Breadcrumbs } from "@mui/material";
+import { Box, Breadcrumbs, Typography } from "@mui/material";
 import Link from "next/link";
 import React from "react";
 import HomeIcon from "@mui/icons-material/Home";
@@ -14,12 +14,11 @@ function BreadCrumb({ path }) {
   console.log(path.split("/"));
   return (
     <div role="presentation">
-      <Breadcrumbs
+      <Breadcrumbs 
         aria-label="breadcrumb"
         separator={<NavigateNextIcon fontSize="small" />}
       >
         <Link
-          underline="hover"
           style={{
             display: "flex",
             alignItems: "center",
@@ -33,7 +32,6 @@ function BreadCrumb({ path }) {
         </Link>
 
         <Box
-          underline="hover"
           sx={{
             display: "flex",
             alignItems: "center",
@@ -46,16 +44,25 @@ function BreadCrumb({ path }) {
 
         {path.split("/")[2] && (
           <Box
-            underline="hover"
             sx={{
               display: "flex",
               alignItems: "center",
               textTransform: "capitalize",
               color: "#312a29",
+              width: { xs: 100, md: "auto" },
             }}
             color="inherit"
           >
-            {convertedCategorySlug(path.split("/")[2])}
+            {" "}
+            <Typography
+              sx={{
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
+            >
+              {convertedCategorySlug(path.split("/")[2])}
+            </Typography>
           </Box>
         )}
       </Breadcrumbs>

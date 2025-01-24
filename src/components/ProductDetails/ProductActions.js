@@ -1,10 +1,11 @@
-import { Box, Button, Icon } from "@mui/material";
+import { Box, Button, Icon, Typography } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import BalanceIcon from "@mui/icons-material/Balance";
 import DeleteIcon from "@mui/icons-material/Delete";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import LocalMallIcon from "@mui/icons-material/LocalMall";
 
 const ProductActions = ({
   handleAddToCart,
@@ -51,7 +52,7 @@ const ProductActions = ({
           onClick={handleAddToCart}
         >
           <ShoppingCartIcon sx={{ marginRight: 1 }} />
-          Add to Cart
+          <Typography variant="body2">Add to Cart</Typography>
         </Button>
       ) : (
         <Box
@@ -76,9 +77,9 @@ const ProductActions = ({
             }}
             disabled
           >
-            Added to Cart
+            <Typography variant="body2">Added to Cart</Typography>
           </Button>
-          <Box sx={{ display: "flex" }} gap={1}>
+          <Box sx={{ display: "flex", alignItems:"center"}} gap={1}>
             <Icon
               onClick={handleDecreaseQuantity}
               sx={{
@@ -90,7 +91,7 @@ const ProductActions = ({
             >
               <RemoveCircleOutlineIcon />
             </Icon>
-            <Box>{cartItem.quantity}</Box>
+            <Typography variant="body2">{cartItem.quantity}</Typography>
             <Icon
               onClick={handleIncreaseQuantity}
               sx={{
@@ -114,59 +115,100 @@ const ProductActions = ({
                 color: "#ff4b36",
                 borderColor: "#ff4b36",
               },
+              textTransform: "none",
             }}
             onClick={handleRemoveFromCart}
           >
             <DeleteIcon sx={{ marginRight: 1 }} />
-            Remove
+            <Typography variant="body2">Remove</Typography>
           </Button>
         </Box>
       )}
 
       <Button
-        variant="outlined"
-        fullWidth
+        variant="contained"
         size="small"
         sx={{
+          backgroundColor: "#ff6f61",
+          color: "white",
+          width: "100%",
+          "&:hover": { backgroundColor: "#ff4b36" },
           textTransform: "none",
-          fontSize: "0.75rem",
-          padding: "6px 12px",
-          borderColor: "#ff6f61",
+          fontWeight: "bold",
+          borderRadius: "8px",
           marginTop: 2,
-          color: "#ff6f61",
-          "&:hover": {
-            borderColor: "#ff4b36",
-            color: "#ff4b36",
-          },
+          display: "flex",
+          alignItems: "center",
         }}
-        onClick={handleWishlistClick}
+        // onClick={handleAddToCart}
       >
-        <FavoriteIcon sx={{ marginRight: 1 }} />
-        {isInWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
+        <LocalMallIcon sx={{ marginRight: 1 }} />
+        <Typography variant="body2">Buy Now</Typography>
       </Button>
 
-      <Button
-        variant="outlined"
-        fullWidth
-        size="small"
+      <Box
         sx={{
-          textTransform: "none",
-          fontSize: "0.75rem",
-          padding: "6px 12px",
-          borderColor: "#ff6f61",
-          marginTop: 2,
-          color: "#ff6f61",
-          "&:hover": {
-            borderColor: "#ff4b36",
-            color: "#ff4b36",
-          },
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
         }}
-        onClick={handleCompareClick}
-        disabled={isCompareDisabled}
+        gap={{ xs: 1, md: 1 }}
       >
-        <BalanceIcon sx={{ marginRight: 1 }} />
-        {isInCompare ? "Remove from Compare" : "Add to Compare"}
-      </Button>
+        <Button
+          variant="outlined"
+          fullWidth
+          size="small"
+          sx={{
+            textTransform: "none",
+            fontSize: "0.75rem",
+            padding: "6px 12px",
+            borderColor: "#ff6f61",
+            marginTop: 2,
+            color: "#ff6f61",
+            "&:hover": {
+              borderColor: "#ff4b36",
+              color: "#ff4b36",
+            },
+            
+          }}
+          onClick={handleWishlistClick}
+        >
+          <FavoriteIcon sx={{ marginRight: 1 }} />
+          <Typography variant="body2" sx={{whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",}}>
+            {isInWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
+          </Typography>
+        </Button>
+
+        <Button
+          variant="outlined"
+          fullWidth
+          size="small"
+          sx={{
+            textTransform: "none",
+            fontSize: "0.75rem",
+            padding: "6px 12px",
+            borderColor: "#ff6f61",
+            marginTop: 2,
+            color: "#ff6f61",
+            "&:hover": {
+              borderColor: "#ff4b36",
+              color: "#ff4b36",
+            },
+            
+          }}
+          onClick={handleCompareClick}
+          disabled={isCompareDisabled}
+        >
+          <BalanceIcon sx={{ marginRight: 1 }} />
+          <Typography variant="body2" sx={{whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",}}>
+            {isInCompare ? "Remove from Compare" : "Add to Compare"}
+          </Typography>
+        </Button>
+      </Box>
     </Box>
   );
 };

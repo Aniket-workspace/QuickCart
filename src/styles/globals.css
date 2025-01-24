@@ -61,3 +61,15 @@ a {
 .css-1l5xwdx-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
   color: #fff;
 }
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+
+
