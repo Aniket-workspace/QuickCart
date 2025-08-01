@@ -11,7 +11,7 @@ const nextConfig = {
         headers: [
           {
             key: 'Content-Security-Policy',
-            value: "frame-ancestors 'self' https://masline.com https://www.masline.com;",
+            value: "frame-ancestors 'self' https://masline.com;",
           },
         ],
       },
